@@ -1,0 +1,23 @@
+# @package _global_
+# Adaptation track: cylinder reorientation with randomized object physics.
+defaults:
+  - /task/allegro_reorient/cylinder
+  - /task/allegro_adapt/_adapt
+  - _self_
+  # The privileged block must stay last in the critic vector: merge it after
+  # this file's own per-object terms.
+  - /task/allegro_adapt/_adapt_priv
+
+env:
+  scene:
+    model_file: ${hw2_assets:robots/allegro_hand/scene_cylinder.xml}
+  observations:
+    critic:
+      terms:
+        object_quat:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.object_quat_canonical_w
+          history_length: 0
+          params:
+            asset_cfg:
+              _target_: unilab.managers.SceneEntityCfg
+              name: object

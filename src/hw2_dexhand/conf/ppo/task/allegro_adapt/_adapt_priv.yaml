@@ -1,0 +1,27 @@
+# @package _global_
+# Privileged block appended LAST to the critic group (after any per-object
+# terms the leaf adds), plus the group mapping and the actor-group default.
+env:
+  observations:
+    critic:
+      terms:
+        object_physics:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.object_physics_priv
+          history_length: 0
+          params:
+            event_name: randomize_object_physics
+        hand_gains:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.hand_gains_priv
+          history_length: 0
+          params:
+            event_name: randomize_hand_gains
+  critic_observation_group: critic
+
+algo:
+  # The packaged default is what the evaluator grades: the actor reads the
+  # policy terms only (the blind baseline when the actor is a plain MLP). A
+  # training-only overlay may set `actor: [critic]` to read the sampled physics;
+  # such a policy cannot be submitted.
+  obs_groups:
+    actor: [actor]
+    critic: [critic]

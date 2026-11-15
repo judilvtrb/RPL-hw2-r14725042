@@ -1,0 +1,35 @@
+# HW2 scoring rubric. Edit thresholds here; the evaluator reads this file.
+#
+# Each cell is scored on `metric` (a key of the evaluation summary). The tier
+# reached is the highest threshold the value meets, and the cell earns
+# `points[tier]`. A cell whose checkpoint cannot be evaluated (missing, wrong
+# task, incompatible observation layout, forbidden inputs) earns 0.
+metric: goals_per_episode
+points: [1.0, 2.0, 3.0]
+# Single-object cells (<task>/<object>). A `<task>/<object>` key overrides the
+# task-wide entry for that one object: the objects differ in difficulty by
+# almost an order of magnitude, so the graded so3 cells and the yaw practice
+# cells carry per-object thresholds. yaw_relative / so3_relative are practice
+# cells with uncalibrated placeholders.
+tiers:
+  yaw_absolute: [0.5, 1.5, 3.0]
+  yaw_absolute/cube: [0.3, 0.6, 0.9]
+  yaw_absolute/cylinder: [0.3, 0.6, 0.9]
+  yaw_relative: [0.5, 1.5, 3.0]
+  so3_absolute: [0.25, 0.75, 1.5]
+  so3_absolute/ball: [1.5, 3.0, 5.0]
+  so3_relative: [0.25, 0.75, 1.5]
+# Adaptation cells (adapt/<task>/<object>) are graded under the held-out physics
+# range, where a policy that ignores the physics already clears the
+# single-object tiers, so a task listed here uses its own thresholds. Tasks
+# without an entry fall back to `tiers`.
+adapt_tiers:
+  yaw_absolute: [5.0, 6.5, 8.0]
+# Multi-object cells (multi/<task>) score the worst of the three objects, and
+# the policy never observes which object it holds, so a task listed here uses
+# its own thresholds (applied to the pooled cell and to each per-object part).
+multi_tiers:
+  yaw_absolute: [0.5, 1.0, 2.0]
+# Episodes evaluated per cell and per scenario when the caller does not say
+# otherwise. 64 keeps the standard error of goals / episode under ~1.
+default_episodes: 64

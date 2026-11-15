@@ -1,0 +1,59 @@
+# @package _global_
+# Adaptation track additions, composed on top of a reorient owner:
+#  * object physics randomized at every reset (training range A);
+#  * a critic observation group = the policy terms + the privileged physics,
+#    which a privileged, training-only policy may read with `algo.obs_groups.actor: [critic]`.
+env:
+  events:
+    randomize_object_physics:
+      func: hw2_dexhand.tasks.allegro_inhand.terms.randomize_object_physics
+      mode: reset
+      params:
+        mass_scale_range: [0.5, 1.5]
+        friction_scale_range: [0.6, 1.4]
+        com_offset_range: [-0.01, 0.01]
+        asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: object
+          body_names: [object]
+          geom_names: [object]
+    randomize_hand_gains:
+      func: hw2_dexhand.tasks.allegro_inhand.terms.randomize_hand_gains
+      mode: reset
+      params:
+        kp_scale_range: [0.7, 1.3]
+        asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: robot
+  observations:
+    critic:
+      concatenate_terms: true
+      terms:
+        joint_pos:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.hand_joint_pos_normalized
+          history_length: 3
+          params:
+            asset_cfg:
+              _target_: unilab.managers.SceneEntityCfg
+              name: robot
+        joint_target:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.joint_position_target
+          history_length: 3
+          params:
+            action_name: hand
+            entity_name: robot
+        object_pos:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.object_pos_w
+          history_length: 3
+          params:
+            asset_cfg:
+              _target_: unilab.managers.SceneEntityCfg
+              name: object
+        goal_rel_quat:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.goal_relative_quat
+          history_length: 0
+          params:
+            command_name: goal
+            asset_cfg:
+              _target_: unilab.managers.SceneEntityCfg
+              name: object

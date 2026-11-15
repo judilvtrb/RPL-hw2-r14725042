@@ -1,0 +1,41 @@
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13"]
+build-backend = "uv_build"
+
+[project]
+name = "hw2-dexhand"
+version = "0.1.0"
+description = "HW2: Allegro in-hand reorientation tasks and evaluator as a UniLab task package"
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+license = "Apache-2.0"
+dependencies = [
+    "unilab>=1.5.2,<1.6",
+    "numpy",
+    "torch",
+    "hydra-core>=1.3",
+    "omegaconf",
+]
+
+[project.scripts]
+hw2 = "hw2_dexhand.cli:main"
+
+# UniLab discovers task packages through this entry-point group and imports the
+# modules listed in ``hw2_dexhand.tasks.__unilab_registry_modules__``.
+[project.entry-points."unilab.tasks"]
+hw2_dexhand = "hw2_dexhand.tasks"
+
+[dependency-groups]
+dev = ["ruff"]
+
+[tool.uv.build-backend]
+module-name = "hw2_dexhand"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]

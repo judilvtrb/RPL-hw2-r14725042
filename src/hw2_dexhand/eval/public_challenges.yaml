@@ -1,0 +1,73 @@
+# Public adaptation scenarios (problem 3): the self-check behind
+#
+#     hw2 eval adapt/<task>/<object> <run> --config my.yaml --challenge public
+#
+# Each scenario is applied on top of the cell's evaluation config, which has
+# already re-imposed everything the evaluator owns and removed the privileged
+# terms, so the only thing a scenario changes is the physics range. The cell
+# itself (reported first) draws all four properties from the held-out range;
+# here ONE property leaves the training range at a time while the other three
+# stay inside it, so each line tells you which property your policy handles.
+#
+# Training range:  mass x0.5-1.5, friction x0.6-1.4, COM +-0.01 m, kp x0.7-1.3
+# Held-out range:  mass x0.3-2.0, friction x0.4-1.8, COM +-0.02 m, kp x0.5-1.6
+#
+# These scenarios earn no points; the hidden grading set is built from the same
+# envelope (pinned extremes, several properties at once, a different seed).
+challenges:
+  - name: in_range
+    description: all four properties inside the training range (control)
+    overrides:
+      - env.events.randomize_object_physics.params.mass_scale_range=[0.5,1.5]
+      - env.events.randomize_object_physics.params.friction_scale_range=[0.6,1.4]
+      - env.events.randomize_object_physics.params.com_offset_range=[-0.01,0.01]
+      - env.events.randomize_hand_gains.params.kp_scale_range=[0.7,1.3]
+  - name: light
+    description: mass x0.3-0.5, the rest in the training range
+    overrides:
+      - env.events.randomize_object_physics.params.mass_scale_range=[0.3,0.5]
+      - env.events.randomize_object_physics.params.friction_scale_range=[0.6,1.4]
+      - env.events.randomize_object_physics.params.com_offset_range=[-0.01,0.01]
+      - env.events.randomize_hand_gains.params.kp_scale_range=[0.7,1.3]
+  - name: heavy
+    description: mass x1.5-2.0, the rest in the training range
+    overrides:
+      - env.events.randomize_object_physics.params.mass_scale_range=[1.5,2.0]
+      - env.events.randomize_object_physics.params.friction_scale_range=[0.6,1.4]
+      - env.events.randomize_object_physics.params.com_offset_range=[-0.01,0.01]
+      - env.events.randomize_hand_gains.params.kp_scale_range=[0.7,1.3]
+  - name: slippery
+    description: friction x0.4-0.6, the rest in the training range
+    overrides:
+      - env.events.randomize_object_physics.params.mass_scale_range=[0.5,1.5]
+      - env.events.randomize_object_physics.params.friction_scale_range=[0.4,0.6]
+      - env.events.randomize_object_physics.params.com_offset_range=[-0.01,0.01]
+      - env.events.randomize_hand_gains.params.kp_scale_range=[0.7,1.3]
+  - name: sticky
+    description: friction x1.4-1.8, the rest in the training range
+    overrides:
+      - env.events.randomize_object_physics.params.mass_scale_range=[0.5,1.5]
+      - env.events.randomize_object_physics.params.friction_scale_range=[1.4,1.8]
+      - env.events.randomize_object_physics.params.com_offset_range=[-0.01,0.01]
+      - env.events.randomize_hand_gains.params.kp_scale_range=[0.7,1.3]
+  - name: off_center
+    description: centre of mass offset +-0.02 m per axis, the rest in the training range
+    overrides:
+      - env.events.randomize_object_physics.params.mass_scale_range=[0.5,1.5]
+      - env.events.randomize_object_physics.params.friction_scale_range=[0.6,1.4]
+      - env.events.randomize_object_physics.params.com_offset_range=[-0.02,0.02]
+      - env.events.randomize_hand_gains.params.kp_scale_range=[0.7,1.3]
+  - name: weak_motor
+    description: actuator gain x0.5-0.7, the rest in the training range
+    overrides:
+      - env.events.randomize_object_physics.params.mass_scale_range=[0.5,1.5]
+      - env.events.randomize_object_physics.params.friction_scale_range=[0.6,1.4]
+      - env.events.randomize_object_physics.params.com_offset_range=[-0.01,0.01]
+      - env.events.randomize_hand_gains.params.kp_scale_range=[0.5,0.7]
+  - name: strong_motor
+    description: actuator gain x1.3-1.6, the rest in the training range
+    overrides:
+      - env.events.randomize_object_physics.params.mass_scale_range=[0.5,1.5]
+      - env.events.randomize_object_physics.params.friction_scale_range=[0.6,1.4]
+      - env.events.randomize_object_physics.params.com_offset_range=[-0.01,0.01]
+      - env.events.randomize_hand_gains.params.kp_scale_range=[1.3,1.6]

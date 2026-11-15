@@ -1,0 +1,16 @@
+# @package _global_
+defaults:
+  - /task/allegro_hold/single
+  - _self_
+
+env:
+  scene:
+    model_file: ${hw2_assets:robots/allegro_hand/scene_ball.xml}
+
+reward:
+  alive:
+    func: unilab.envs.mdp.is_alive
+    weight: 1.0
+  action_rate:
+    func: unilab.envs.mdp.action_rate_l2
+    weight: -0.01

@@ -1,0 +1,28 @@
+# @package _global_
+defaults:
+  - /task/allegro_reorient/base
+  - _self_
+
+env:
+  scene:
+    model_file: ${hw2_assets:robots/allegro_hand/scene_cylinder.xml}
+  events:
+    reset_from_grasp_cache:
+      params:
+        cache_path: ${hw2_cache:allegro_cylinder_grasp_10k.npy}
+  terminations:
+    object_dropped:
+      params:
+        z_threshold: 0.105
+  observations:
+    policy:
+      terms:
+        # Faces/markers make the absolute orientation observable and useful;
+        # the original cube and cylinder layouts included it (obs 113).
+        object_quat:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.object_quat_canonical_w
+          history_length: 0
+          params:
+            asset_cfg:
+              _target_: unilab.managers.SceneEntityCfg
+              name: object

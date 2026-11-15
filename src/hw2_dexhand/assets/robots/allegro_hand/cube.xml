@@ -1,0 +1,68 @@
+<mujoco>
+  <!-- Rubik's-cube-like object for the Allegro reorientation task.
+       One collision box plus 54 visual-only stickers so every face is distinct
+       and the orientation is obvious in the viewer. Matches ball.xml contact
+       parameters; the body name is referenced by env.object_body_name. -->
+  <worldbody>
+    <body name="object" pos="0 0 0.3" simple="false">
+      <freejoint name="object_joint"/>
+      <geom name="object" type="box" size="0.035 0.035 0.035" mass="0.08" condim="6"
+            friction="2.0 0.05 0.01" solimp="0.9 0.95 0.001" solref="0.02 1"
+            rgba="0.05 0.05 0.05 1"/>
+      <geom name="cube_sticker_pz_0" type="box" size="0.0100 0.0100 0.0015" pos="-0.0233 -0.0233 0.0365" rgba="0.95 0.95 0.95 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_pz_1" type="box" size="0.0100 0.0100 0.0015" pos="-0.0233 0.0000 0.0365" rgba="0.95 0.95 0.95 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_pz_2" type="box" size="0.0100 0.0100 0.0015" pos="-0.0233 0.0233 0.0365" rgba="0.95 0.95 0.95 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_pz_3" type="box" size="0.0100 0.0100 0.0015" pos="0.0000 -0.0233 0.0365" rgba="0.95 0.95 0.95 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_pz_4" type="box" size="0.0100 0.0100 0.0015" pos="0.0000 0.0000 0.0365" rgba="0.95 0.95 0.95 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_pz_5" type="box" size="0.0100 0.0100 0.0015" pos="0.0000 0.0233 0.0365" rgba="0.95 0.95 0.95 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_pz_6" type="box" size="0.0100 0.0100 0.0015" pos="0.0233 -0.0233 0.0365" rgba="0.95 0.95 0.95 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_pz_7" type="box" size="0.0100 0.0100 0.0015" pos="0.0233 0.0000 0.0365" rgba="0.95 0.95 0.95 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_pz_8" type="box" size="0.0100 0.0100 0.0015" pos="0.0233 0.0233 0.0365" rgba="0.95 0.95 0.95 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nz_0" type="box" size="0.0100 0.0100 0.0015" pos="-0.0233 -0.0233 -0.0365" rgba="1.0 0.85 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nz_1" type="box" size="0.0100 0.0100 0.0015" pos="-0.0233 0.0000 -0.0365" rgba="1.0 0.85 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nz_2" type="box" size="0.0100 0.0100 0.0015" pos="-0.0233 0.0233 -0.0365" rgba="1.0 0.85 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nz_3" type="box" size="0.0100 0.0100 0.0015" pos="0.0000 -0.0233 -0.0365" rgba="1.0 0.85 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nz_4" type="box" size="0.0100 0.0100 0.0015" pos="0.0000 0.0000 -0.0365" rgba="1.0 0.85 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nz_5" type="box" size="0.0100 0.0100 0.0015" pos="0.0000 0.0233 -0.0365" rgba="1.0 0.85 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nz_6" type="box" size="0.0100 0.0100 0.0015" pos="0.0233 -0.0233 -0.0365" rgba="1.0 0.85 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nz_7" type="box" size="0.0100 0.0100 0.0015" pos="0.0233 0.0000 -0.0365" rgba="1.0 0.85 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nz_8" type="box" size="0.0100 0.0100 0.0015" pos="0.0233 0.0233 -0.0365" rgba="1.0 0.85 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_px_0" type="box" size="0.0015 0.0100 0.0100" pos="0.0365 -0.0233 -0.0233" rgba="0.85 0.1 0.1 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_px_1" type="box" size="0.0015 0.0100 0.0100" pos="0.0365 -0.0233 0.0000" rgba="0.85 0.1 0.1 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_px_2" type="box" size="0.0015 0.0100 0.0100" pos="0.0365 -0.0233 0.0233" rgba="0.85 0.1 0.1 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_px_3" type="box" size="0.0015 0.0100 0.0100" pos="0.0365 0.0000 -0.0233" rgba="0.85 0.1 0.1 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_px_4" type="box" size="0.0015 0.0100 0.0100" pos="0.0365 0.0000 0.0000" rgba="0.85 0.1 0.1 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_px_5" type="box" size="0.0015 0.0100 0.0100" pos="0.0365 0.0000 0.0233" rgba="0.85 0.1 0.1 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_px_6" type="box" size="0.0015 0.0100 0.0100" pos="0.0365 0.0233 -0.0233" rgba="0.85 0.1 0.1 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_px_7" type="box" size="0.0015 0.0100 0.0100" pos="0.0365 0.0233 0.0000" rgba="0.85 0.1 0.1 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_px_8" type="box" size="0.0015 0.0100 0.0100" pos="0.0365 0.0233 0.0233" rgba="0.85 0.1 0.1 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nx_0" type="box" size="0.0015 0.0100 0.0100" pos="-0.0365 -0.0233 -0.0233" rgba="1.0 0.5 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nx_1" type="box" size="0.0015 0.0100 0.0100" pos="-0.0365 -0.0233 0.0000" rgba="1.0 0.5 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nx_2" type="box" size="0.0015 0.0100 0.0100" pos="-0.0365 -0.0233 0.0233" rgba="1.0 0.5 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nx_3" type="box" size="0.0015 0.0100 0.0100" pos="-0.0365 0.0000 -0.0233" rgba="1.0 0.5 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nx_4" type="box" size="0.0015 0.0100 0.0100" pos="-0.0365 0.0000 0.0000" rgba="1.0 0.5 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nx_5" type="box" size="0.0015 0.0100 0.0100" pos="-0.0365 0.0000 0.0233" rgba="1.0 0.5 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nx_6" type="box" size="0.0015 0.0100 0.0100" pos="-0.0365 0.0233 -0.0233" rgba="1.0 0.5 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nx_7" type="box" size="0.0015 0.0100 0.0100" pos="-0.0365 0.0233 0.0000" rgba="1.0 0.5 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_nx_8" type="box" size="0.0015 0.0100 0.0100" pos="-0.0365 0.0233 0.0233" rgba="1.0 0.5 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_py_0" type="box" size="0.0100 0.0015 0.0100" pos="-0.0233 0.0365 -0.0233" rgba="0.1 0.7 0.2 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_py_1" type="box" size="0.0100 0.0015 0.0100" pos="-0.0233 0.0365 0.0000" rgba="0.1 0.7 0.2 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_py_2" type="box" size="0.0100 0.0015 0.0100" pos="-0.0233 0.0365 0.0233" rgba="0.1 0.7 0.2 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_py_3" type="box" size="0.0100 0.0015 0.0100" pos="0.0000 0.0365 -0.0233" rgba="0.1 0.7 0.2 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_py_4" type="box" size="0.0100 0.0015 0.0100" pos="0.0000 0.0365 0.0000" rgba="0.1 0.7 0.2 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_py_5" type="box" size="0.0100 0.0015 0.0100" pos="0.0000 0.0365 0.0233" rgba="0.1 0.7 0.2 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_py_6" type="box" size="0.0100 0.0015 0.0100" pos="0.0233 0.0365 -0.0233" rgba="0.1 0.7 0.2 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_py_7" type="box" size="0.0100 0.0015 0.0100" pos="0.0233 0.0365 0.0000" rgba="0.1 0.7 0.2 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_py_8" type="box" size="0.0100 0.0015 0.0100" pos="0.0233 0.0365 0.0233" rgba="0.1 0.7 0.2 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_ny_0" type="box" size="0.0100 0.0015 0.0100" pos="-0.0233 -0.0365 -0.0233" rgba="0.1 0.3 0.9 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_ny_1" type="box" size="0.0100 0.0015 0.0100" pos="-0.0233 -0.0365 0.0000" rgba="0.1 0.3 0.9 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_ny_2" type="box" size="0.0100 0.0015 0.0100" pos="-0.0233 -0.0365 0.0233" rgba="0.1 0.3 0.9 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_ny_3" type="box" size="0.0100 0.0015 0.0100" pos="0.0000 -0.0365 -0.0233" rgba="0.1 0.3 0.9 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_ny_4" type="box" size="0.0100 0.0015 0.0100" pos="0.0000 -0.0365 0.0000" rgba="0.1 0.3 0.9 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_ny_5" type="box" size="0.0100 0.0015 0.0100" pos="0.0000 -0.0365 0.0233" rgba="0.1 0.3 0.9 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_ny_6" type="box" size="0.0100 0.0015 0.0100" pos="0.0233 -0.0365 -0.0233" rgba="0.1 0.3 0.9 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_ny_7" type="box" size="0.0100 0.0015 0.0100" pos="0.0233 -0.0365 0.0000" rgba="0.1 0.3 0.9 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cube_sticker_ny_8" type="box" size="0.0100 0.0015 0.0100" pos="0.0233 -0.0365 0.0233" rgba="0.1 0.3 0.9 1" contype="0" conaffinity="0" group="1" mass="0"/>
+    </body>
+  </worldbody>
+</mujoco>

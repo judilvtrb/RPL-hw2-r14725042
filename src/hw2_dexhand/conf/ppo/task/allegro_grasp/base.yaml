@@ -1,0 +1,77 @@
+# @package _global_
+# Grasp collection (hw2 make-caches): zero actions from a noisy keyframe pose,
+# 3 s episodes, no auto-reset so the collector can inspect the final state.
+# The `grasp` critic group carries exactly what the collector saves/checks.
+defaults:
+  - /task/allegro_hold/single
+  - _self_
+
+training:
+  task_name: AllegroInhandHold
+
+env:
+  max_episode_seconds: 3.0
+  auto_reset: false
+  events:
+    reset_joint_noise:
+      func: hw2_dexhand.tasks.allegro_inhand.terms.reset_joint_noise
+      mode: reset
+      params:
+        joint_noise: 0.25
+        action_name: hand
+        asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: robot
+  observations:
+    critic:
+      concatenate_terms: true
+      terms:
+        hand_joints:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.hand_joint_pos_raw
+          params:
+            asset_cfg:
+              _target_: unilab.managers.SceneEntityCfg
+              name: robot
+        object_pos:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.object_pos_w
+          params:
+            asset_cfg:
+              _target_: unilab.managers.SceneEntityCfg
+              name: object
+        object_quat:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.object_quat_w
+          params:
+            asset_cfg:
+              _target_: unilab.managers.SceneEntityCfg
+              name: object
+        fingertips:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.fingertip_pos_w
+          params:
+            entity_name: robot
+            body_names: [ff_tip, mf_tip, rf_tip, th_tip]
+        contact_ff:
+          func: unilab.envs.mdp.builtin_sensor
+          params:
+            sensor_name: ff_contact
+            entity_name: robot
+        contact_mf:
+          func: unilab.envs.mdp.builtin_sensor
+          params:
+            sensor_name: mf_contact
+            entity_name: robot
+        contact_rf:
+          func: unilab.envs.mdp.builtin_sensor
+          params:
+            sensor_name: rf_contact
+            entity_name: robot
+        contact_th:
+          func: unilab.envs.mdp.builtin_sensor
+          params:
+            sensor_name: th_contact
+            entity_name: robot
+  critic_observation_group: critic
+
+reward:
+  alive:
+    func: unilab.envs.mdp.is_alive
+    weight: 1.0

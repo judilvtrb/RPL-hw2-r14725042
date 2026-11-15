@@ -1,0 +1,16 @@
+# @package _global_
+defaults:
+  - /task/allegro_reorient/base
+  - _self_
+
+env:
+  scene:
+    model_file: ${hw2_assets:robots/allegro_hand/scene_ball.xml}
+  events:
+    reset_from_grasp_cache:
+      params:
+        cache_path: ${hw2_cache:allegro_ball_grasp_10k.npy}
+  terminations:
+    object_dropped:
+      params:
+        z_threshold: 0.125

@@ -1,0 +1,75 @@
+# @package _global_
+# In-hand rotation about a fixed axis (the original Allegro rotation task):
+# resets come from a cache of stable grasps and the reward pays object angular
+# velocity about `axis`, minus object drift, hand drift from the grasp pose,
+# proxy PD torque and work.
+defaults:
+  - /task/allegro_hold/single
+  - _self_
+
+training:
+  task_name: AllegroInhandRotation
+
+env:
+  events:
+    reset_from_grasp_cache:
+      func: hw2_dexhand.tasks.allegro_inhand.terms.reset_from_grasp_cache
+      mode: reset
+      params:
+        cache_path: ${hw2_cache:allegro_ball_grasp_10k.npy}
+        joint_noise: 0.0
+        action_name: hand
+        hand_asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: robot
+        object_asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: object
+
+reward:
+  rotate:
+    func: hw2_dexhand.tasks.allegro_inhand.terms.object_angvel_about_axis
+    weight: 1.25
+    params:
+      axis: [0.0, 0.0, 1.0]
+      clip: [-0.5, 0.5]
+      asset_cfg:
+        _target_: unilab.managers.SceneEntityCfg
+        name: object
+  obj_linvel:
+    func: hw2_dexhand.tasks.allegro_inhand.terms.object_lin_vel_l1
+    weight: -0.3
+    params:
+      asset_cfg:
+        _target_: unilab.managers.SceneEntityCfg
+        name: object
+  pose_diff:
+    func: hw2_dexhand.tasks.allegro_inhand.terms.hand_pose_diff_from_reset
+    weight: -0.3
+    params:
+      event_name: reset_from_grasp_cache
+      asset_cfg:
+        _target_: unilab.managers.SceneEntityCfg
+        name: robot
+  torque:
+    func: hw2_dexhand.tasks.allegro_inhand.terms.hand_pd_torque_l2
+    weight: -0.1
+    params:
+      kp: 1.0
+      kd: 0.1
+      torque_clip: 0.5
+      action_name: hand
+      asset_cfg:
+        _target_: unilab.managers.SceneEntityCfg
+        name: robot
+  work:
+    func: hw2_dexhand.tasks.allegro_inhand.terms.hand_pd_work_sq
+    weight: -2.0
+    params:
+      kp: 1.0
+      kd: 0.1
+      torque_clip: 0.5
+      action_name: hand
+      asset_cfg:
+        _target_: unilab.managers.SceneEntityCfg
+        name: robot

@@ -1,0 +1,66 @@
+# @package _global_
+# Goal-pose reorientation (the original Allegro reorient task). Inherits the
+# rotation owner (grasp-cache resets, drift/torque/work penalties) and adds the
+# goal command, the goal-relative observation, and the orientation and success
+# rewards; the dense z-rotation term stays available at weight 0.
+defaults:
+  - /task/allegro_rotate/base
+  - _self_
+
+training:
+  task_name: AllegroInhandReorient
+
+env:
+  commands:
+    goal:
+      _target_: hw2_dexhand.tasks.allegro_inhand.terms.GoalOrientationCommandCfg
+      entity_name: object
+      mode: yaw            # "yaw" (rotation about world z) or "so3" (uniform orientation)
+      frame: absolute      # "absolute" (world orientation) or "relative" (rotation from the reset pose)
+      yaw_range: [-3.141592653589793, 3.141592653589793]
+      success_tolerance_rad: 0.4
+      resample_on_success: true
+      max_consecutive_successes: 0   # 0 keeps episodes running after a success
+  observations:
+    policy:
+      terms:
+        # Appended after the history-stacked proprioception: the policy sees
+        # the rotation still needed to reach the goal (4), as in the original layout.
+        goal_rel_quat:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.goal_relative_quat
+          history_length: 0
+          params:
+            command_name: goal
+            asset_cfg:
+              _target_: unilab.managers.SceneEntityCfg
+              name: object
+  terminations:
+    goal_count_reached:
+      func: hw2_dexhand.tasks.allegro_inhand.terms.goal_count_reached
+      params:
+        command_name: goal
+
+reward:
+  rotate:
+    weight: 0.0
+  orientation:
+    func: hw2_dexhand.tasks.allegro_inhand.terms.goal_orientation_reward
+    weight: 1.0
+    params:
+      rot_eps: 0.1
+      command_name: goal
+      asset_cfg:
+        _target_: unilab.managers.SceneEntityCfg
+        name: object
+  success:
+    func: hw2_dexhand.tasks.allegro_inhand.terms.goal_success
+    weight: 250.0
+    params:
+      command_name: goal
+      asset_cfg:
+        _target_: unilab.managers.SceneEntityCfg
+        name: object
+
+algo:
+  # Default budget: 1024 x 24 x 400 ~ 9.8M samples on a laptop CPU.
+  max_iterations: 400

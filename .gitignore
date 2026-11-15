@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+logs/
+outputs/
+*.pt
+*.onnx
+*.mp4
+# Grasp caches are generated locally (make-caches) and are too large for git.
+src/hw2_dexhand/assets/caches/*
+!src/hw2_dexhand/assets/caches/.gitkeep
+.DS_Store

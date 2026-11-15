@@ -1,0 +1,52 @@
+# HW2 student configuration (overlay).
+#
+# `hw2 train <cell> --config this.yaml` composes the cell's reference owner
+# (hand, object, goal, episode length, terminations: fixed by the evaluator)
+# and merges this file on top. Every `???` must be filled before training
+# starts. Keys not listed here keep their reference values; you may add any
+# other key you want to change (observations, DR events, PPO settings ...).
+#
+# Fields you own: observations, action scale, training-time randomization
+# events, rewards and their weights, and everything under `algo`.
+# Fields the evaluator owns and will overwrite at grading time: the scene,
+# the goal command, terminations, timing, the observation group names and the
+# two reset events. On the
+# adaptation track (`hw2 template --adapt`) the physics randomization events
+# are fixed as well.
+
+reward:
+  # Weights of the reference terms. 0 disables a term; add your own terms too.
+  orientation:
+    weight: ???        # dense 1 / (orientation error + rot_eps)
+  success:
+    weight: ???        # paid every step inside the success tolerance
+  obj_linvel:
+    weight: ???        # object linear-velocity penalty
+  pose_diff:
+    weight: ???        # hand drift from the grasp pose
+  torque:
+    weight: ???        # proxy PD torque penalty
+  work:
+    weight: ???        # proxy PD work penalty
+
+algo:
+  num_envs: ???        # 1024 x 24 steps x 400 iterations: 10 to 15 min on an Apple-silicon laptop CPU
+  num_steps_per_env: ???
+  max_iterations: ???
+  save_interval: 50
+  actor:
+    hidden_dims: ???   # e.g. [256, 128]
+    activation: elu
+    obs_normalization: true
+  critic:
+    hidden_dims: ???
+    activation: elu
+    obs_normalization: true
+  algorithm:
+    learning_rate: ???
+    entropy_coef: ???
+    gamma: ???
+    lam: ???
+    desired_kl: ???
+    num_learning_epochs: 5
+    num_mini_batches: 4

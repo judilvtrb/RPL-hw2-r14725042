@@ -1,0 +1,65 @@
+# @package _global_
+# Mixed pool: ball, cube and cylinder all live in every env; env i's active
+# object is i % 3. See terms/multi_object.py for why this is not a variant plan.
+defaults:
+  - /task/allegro_hold/base
+  - _self_
+
+env:
+  scene:
+    model_file: ${hw2_assets:robots/allegro_hand/scene_multi.xml}
+    entities:
+      # Root entities own the reset writes (one free joint each).
+      object_ball:
+        root_body_name: object_ball
+        body_names: [object_ball]
+      object_cube:
+        root_body_name: object_cube
+        body_names: [object_cube]
+      object_cylinder:
+        root_body_name: object_cylinder
+        body_names: [object_cylinder]
+      # Read-only entity packing all object bodies for the active-object terms.
+      objects:
+        body_names: [object_ball, object_cube, object_cylinder]
+  observations:
+    policy:
+      terms:
+        object_pos:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.active_object_pos_w
+          history_length: 3
+          params:
+            entity_name: objects
+            tensor_body_names: [object_ball, object_cube, object_cylinder]
+  events:
+    place_active_object:
+      func: hw2_dexhand.tasks.allegro_inhand.terms.place_active_object
+      mode: reset
+      params:
+        object_entities: [object_ball, object_cube, object_cylinder]
+        # Palm poses from the single-object keyframes; park poses on the floor
+        # (z = -0.2 + half height), far outside the hand's reach.
+        active_positions:
+          object_ball: [-0.01, -0.01, 0.13]
+          object_cube: [-0.01, -0.01, 0.125]
+          object_cylinder: [-0.01, -0.01, 0.125]
+        park_positions:
+          object_ball: [0.6, 0.3, -0.16]
+          object_cube: [0.6, 0.0, -0.165]
+          object_cylinder: [-0.6, 0.0, -0.165]
+  terminations:
+    object_dropped:
+      func: hw2_dexhand.tasks.allegro_inhand.terms.active_object_dropped
+      params:
+        # Same drop heights as the single-object scenes, per active object.
+        z_thresholds: [0.125, 0.105, 0.105]
+        entity_name: objects
+        tensor_body_names: [object_ball, object_cube, object_cylinder]
+
+reward:
+  alive:
+    func: unilab.envs.mdp.is_alive
+    weight: 1.0
+  action_rate:
+    func: unilab.envs.mdp.action_rate_l2
+    weight: -0.01

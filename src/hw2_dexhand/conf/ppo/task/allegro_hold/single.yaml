@@ -1,0 +1,32 @@
+# @package _global_
+# One free object named "object" (scene_{ball,cube,cylinder}.xml share the name).
+defaults:
+  - /task/allegro_hold/base
+  - _self_
+
+env:
+  scene:
+    entities:
+      object:
+        root_body_name: object
+        body_names: [object]
+        # The collision geom, for friction randomization writes.
+        geom_names: [object]
+  observations:
+    policy:
+      terms:
+        object_pos:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.object_pos_w
+          history_length: 3
+          params:
+            asset_cfg:
+              _target_: unilab.managers.SceneEntityCfg
+              name: object
+  terminations:
+    object_dropped:
+      func: hw2_dexhand.tasks.allegro_inhand.terms.object_dropped
+      params:
+        z_threshold: 0.125
+        asset_cfg:
+          _target_: unilab.managers.SceneEntityCfg
+          name: object

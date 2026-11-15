@@ -1,0 +1,27 @@
+<mujoco>
+  <!-- Upright cylinder for the Allegro reorientation task. One collision
+       cylinder with a checker "heading" texture plus visual-only markers (a red
+       stripe on the +x side and a white dot on the +z cap) so the yaw and the
+       up direction are obvious in the viewer. Contact parameters match
+       cube.xml; the body name is referenced by env.object_body_name. -->
+  <asset>
+    <texture type="2d" name="cylinder_orient_tex" builtin="checker" mark="edge" rgb1="0.12 0.35 0.9"
+      rgb2="0.92 0.92 0.92" markrgb="0.1 0.1 0.1" width="512" height="512"/>
+    <material name="cylinder_orient_mat" texture="cylinder_orient_tex" texuniform="false" texrepeat="4 1"/>
+  </asset>
+
+  <worldbody>
+    <body name="object" pos="0 0 0.3" simple="false">
+      <freejoint name="object_joint"/>
+      <geom name="object" type="cylinder" size="0.035 0.035" mass="0.08" condim="6"
+            friction="2.0 0.05 0.01" solimp="0.9 0.95 0.001" solref="0.02 1"
+            material="cylinder_orient_mat"/>
+      <geom name="cylinder_marker_px" type="box" size="0.0015 0.006 0.030" pos="0.0355 0 0"
+            rgba="0.9 0.1 0.1 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cylinder_marker_pz" type="cylinder" size="0.008 0.001" pos="0.018 0 0.0355"
+            rgba="0.95 0.95 0.95 1" contype="0" conaffinity="0" group="1" mass="0"/>
+      <geom name="cylinder_marker_nz" type="cylinder" size="0.008 0.001" pos="0.018 0 -0.0355"
+            rgba="1.0 0.85 0.0 1" contype="0" conaffinity="0" group="1" mass="0"/>
+    </body>
+  </worldbody>
+</mujoco>

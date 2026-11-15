@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - /task/allegro_grasp/base
+  - _self_
+
+env:
+  scene:
+    model_file: ${hw2_assets:robots/allegro_hand/scene_cylinder.xml}
+  terminations:
+    object_dropped:
+      params:
+        z_threshold: 0.105

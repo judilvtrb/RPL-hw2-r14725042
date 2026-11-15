@@ -1,0 +1,60 @@
+# HW2 adaptation-track overlay (problem 3, cells adapt/<task>/<object>).
+#
+# Same rules as `hw2 template` (student_config.yaml), plus the adaptation
+# contract, which the evaluator enforces:
+#
+#  * env.events.randomize_object_physics and env.events.randomize_hand_gains
+#    are fixed at the packaged training range; `hw2 train adapt/...` refuses an
+#    overlay or command-line override that changes them.
+#  * The graded actor reads the `actor` observation group only. At grading the
+#    environment exposes no sampled physics at all; an overlay whose
+#    algo.obs_groups.actor lists `critic`, or whose non-critic observation
+#    terms return the sampled values, scores 0 on the cell.
+#  * During training the `critic` group ends with the six sampled values
+#    (mass scale, friction scale, COM offset xyz, kp scale), available to the
+#    critic or to anything else you train.
+#  * algo.actor.class_name may be rsl_rl.models.MLPModel or a class of your own
+#    under src/hw2_dexhand/student/ (dotted path). rsl_rl constructs it the
+#    way it constructs MLPModel and passes every other key under algo.actor as
+#    a keyword argument; the submitted checkpoint must load into it with the
+#    actor weights alone.
+
+reward:
+  orientation:
+    weight: ???
+  success:
+    weight: ???
+  obj_linvel:
+    weight: ???
+  pose_diff:
+    weight: ???
+  torque:
+    weight: ???
+  work:
+    weight: ???
+
+algo:
+  obs_groups:
+    actor: [actor]       # graded: the actor group only
+    critic: [critic]     # training only: policy terms + the six sampled values
+  num_envs: ???
+  num_steps_per_env: ???
+  max_iterations: ???
+  save_interval: 50
+  actor:
+    class_name: ???      # rsl_rl.models.MLPModel or hw2_dexhand.student.<module>.<Class>
+    hidden_dims: ???
+    activation: elu
+    obs_normalization: true
+  critic:
+    hidden_dims: ???
+    activation: elu
+    obs_normalization: true
+  algorithm:
+    learning_rate: ???
+    entropy_coef: ???
+    gamma: ???
+    lam: ???
+    desired_kl: ???
+    num_learning_epochs: 5
+    num_mini_batches: 4

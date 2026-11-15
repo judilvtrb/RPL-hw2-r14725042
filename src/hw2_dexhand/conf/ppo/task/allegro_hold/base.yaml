@@ -1,0 +1,119 @@
+# @package _global_
+# Shared Allegro declaration: hand entity, timing, integrated position action,
+# hand observations, rewards and PPO defaults. Object entities and object
+# terms are added by `single.yaml` (one object) or `multi.yaml` (mixed pool).
+env:
+  scene:
+    model_file: ${hw2_assets:robots/allegro_hand/scene_ball.xml}
+    default_keyframe_name: home
+    entities:
+      # UniLab's env factory requires the primary of several floating entities
+      # to be named "robot"; the action term is still called "hand".
+      robot:
+        root_body_name: palm
+        body_names: [palm, ff_tip, mf_tip, rf_tip, th_tip]
+        joint_names:
+          - ffj0
+          - ffj1
+          - ffj2
+          - ffj3
+          - mfj0
+          - mfj1
+          - mfj2
+          - mfj3
+          - rfj0
+          - rfj1
+          - rfj2
+          - rfj3
+          - thj0
+          - thj1
+          - thj2
+          - thj3
+        actuator_names:
+          - ffa0
+          - ffa1
+          - ffa2
+          - ffa3
+          - mfa0
+          - mfa1
+          - mfa2
+          - mfa3
+          - rfa0
+          - rfa1
+          - rfa2
+          - rfa3
+          - tha0
+          - tha1
+          - tha2
+          - tha3
+  # 10 physics substeps per 20 Hz control step, as in the original Allegro envs.
+  sim_dt: 0.005
+  ctrl_dt: 0.05
+  max_episode_seconds: 20.0
+  observations:
+    policy:
+      concatenate_terms: true
+      # Three stacked control steps of (16 normalized joint angles, 16 position
+      # targets, 3 object position) = 105 dims, the original layout.
+      # History is declared per term: a group-level history_length would also
+      # stack the goal terms that the reorient owners append.
+      terms:
+        joint_pos:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.hand_joint_pos_normalized
+          history_length: 3
+          params:
+            asset_cfg:
+              _target_: unilab.managers.SceneEntityCfg
+              name: robot
+        joint_target:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.joint_position_target
+          history_length: 3
+          params:
+            action_name: hand
+            entity_name: robot
+  actions:
+    hand:
+      _target_: hw2_dexhand.tasks.allegro_inhand.terms.IntegratedJointPositionActionCfg
+      entity_name: robot
+      actuator_names: [".*"]
+      # target += scale * clip(action, -1, 1); 1/24 rad per step as in the original env.
+      scale: 0.041666667
+  events:
+    reset_scene_to_default:
+      func: unilab.envs.mdp.reset_scene_to_default
+      mode: reset
+  terminations:
+    time_out:
+      func: unilab.envs.mdp.time_out
+      time_out: true
+  policy_observation_group: policy
+  critic_observation_group: null
+  scale_rewards_by_dt: true
+
+training:
+  task_name: AllegroInhandHold
+  sim_backend: mujoco
+  render_spacing: 0.5
+  cam_distance: 1.5
+  cam_lookat: [0.75, 0.75, 0]
+  cam_elevation: -20.0
+
+algo:
+  num_envs: 1024
+  num_steps_per_env: 24
+  max_iterations: 100
+  obs_groups:
+    actor: [policy]
+    critic: [policy]
+  actor:
+    obs_normalization: true
+  critic:
+    obs_normalization: true
+  algorithm:
+    value_loss_coef: 4.0
+    desired_kl: 0.02
+
+play_profile:
+  enabled: true
+  env:
+    render_spacing: 2.0

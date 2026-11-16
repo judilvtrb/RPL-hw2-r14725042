@@ -63,7 +63,10 @@ class RMAActor(MLPModel):
         short_length: base policy 只看最近幾幀（論文中的 x_t）；其餘的歷史給 φ 用。
         tail_dim: 接在歷史後面、沒有歷史的 term 總維度（goal_rel_quat 是 4）。
         latent_dim: z 的維度。
-        priv_dim: 真實物理參數的數量（critic 群組最後 6 個數字）。
+        priv_dim: 特權資訊的數量（critic 群組最後 priv_dim 個數字）。
+            Problem 3：6 個物理參數。Problem 2：物體 one-hot (3) + 物體姿態四元數 (4) = 7。
+        priv_center / priv_half_range: 特權資訊的正規化（(x - center) / half_range）。
+            不填就用 Problem 3 的訓練範圍。
         priv_hidden_dims: μ 的隱藏層。
         adapt_channels: φ 的卷積通道數。
     """
@@ -86,6 +89,8 @@ class RMAActor(MLPModel):
         priv_dim: int = 6,
         priv_hidden_dims: Sequence[int] = (64, 64),
         adapt_channels: int = 32,
+        priv_center: Sequence[float] | None = None,
+        priv_half_range: Sequence[float] | None = None,
     ) -> None:
         # 這些設定在 super().__init__() 裡就會用到（_get_obs_dim / _get_latent_dim），
         # 所以要先存起來。它們都是一般的 Python 值，不是 nn.Module，可以先設定。
@@ -120,8 +125,14 @@ class RMAActor(MLPModel):
         self.priv_encoder = nn.Sequential(
             MLP(self.priv_dim, self.latent_dim, list(priv_hidden_dims), activation), nn.Tanh()
         )
-        self.register_buffer("priv_center", torch.tensor(_PRIV_CENTER[: self.priv_dim]))
-        self.register_buffer("priv_half_range", torch.tensor(_PRIV_HALF_RANGE[: self.priv_dim]))
+        # 特權資訊的正規化：預設是 Problem 3 的 6 個物理參數；
+        # Problem 2 的特權資訊（物體 one-hot + 物體姿態）在 config 裡另外指定。
+        center = list(priv_center) if priv_center is not None else list(_PRIV_CENTER)
+        half = list(priv_half_range) if priv_half_range is not None else list(_PRIV_HALF_RANGE)
+        if len(center) != self.priv_dim or len(half) != self.priv_dim:
+            raise ValueError("priv_center / priv_half_range 的長度必須等於 priv_dim")
+        self.register_buffer("priv_center", torch.tensor(center, dtype=torch.float32))
+        self.register_buffer("priv_half_range", torch.tensor(half, dtype=torch.float32))
 
         # φ：歷史 → ẑ。結構仿照 RMA 論文：先對每一幀做線性嵌入，再用 1D 卷積看時間上的變化。
         feat = sum(self.term_dims)

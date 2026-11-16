@@ -1,0 +1,96 @@
+# Problem 2 / 第二階段：學生（student）。這一份是要交出去評分的。
+# 學生看不到物體是什麼，只能從最近 30 步的歷史推測（φ 去模仿老師的 z）。
+# 先把老師的 run 資料夾複製到 runs/multi_teacher，再訓練：
+#   hw2 train multi/yaw_absolute --config multi_student.yaml
+# 評分：hw2 eval multi/yaw_absolute <學生的run> --config multi_student.yaml
+
+reward:
+  orientation: {weight: 1.0}
+  success: {weight: 250.0}
+  obj_linvel: {weight: -0.3}
+  pose_diff: {weight: -0.3}
+  torque: {weight: -0.1}
+  work: {weight: -2.0}
+
+env:
+  critic_observation_group: critic   # 只在訓練時建立；評分時評分程式會把它拿掉
+  observations:
+    policy:
+      terms:
+        # 歷史拉長到 30 步，讓學生能從「手感」推測自己拿的是什麼物體
+        joint_pos: {history_length: 30}
+        joint_target: {history_length: 30}
+        object_pos: {history_length: 30}
+    critic:
+      concatenate_terms: true
+      terms:
+        joint_pos:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.hand_joint_pos_normalized
+          history_length: 3
+          params:
+            asset_cfg: {_target_: unilab.managers.SceneEntityCfg, name: robot}
+        joint_target:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.joint_position_target
+          history_length: 3
+          params: {action_name: hand, entity_name: robot}
+        object_pos:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.object_pos_w
+          history_length: 3
+          params:
+            entity_name: objects
+            tensor_body_names: [object_ball, object_cube, object_cylinder]
+        goal_rel_quat:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.goal_relative_quat
+          history_length: 0
+          params:
+            command_name: goal
+            entity_name: objects
+            tensor_body_names: [object_ball, object_cube, object_cylinder]
+        # ↓ 以下兩項是特權資訊（老師和 critic 才看得到），必須放在最後
+        object_id:
+          func: hw2_dexhand.student.terms.object_onehot
+          history_length: 0
+          params: {num_objects: 3}
+        object_quat:
+          func: hw2_dexhand.tasks.allegro_inhand.terms.object_quat_w
+          history_length: 0
+          params:
+            entity_name: objects
+            tensor_body_names: [object_ball, object_cube, object_cylinder]
+
+algo:
+  obs_groups:
+    actor: [actor]           # 只有 actor → 學生模式，評分時合法
+    critic: [critic]
+  num_envs: 1024
+  num_steps_per_env: 24
+  max_iterations: 300
+  save_interval: 50
+  actor:
+    class_name: hw2_dexhand.student.rma.RMAActor
+    hidden_dims: [512, 256, 128]
+    activation: elu
+    obs_normalization: true
+    term_dims: [16, 16, 3]
+    history_length: 30
+    short_length: 3
+    tail_dim: 4
+    latent_dim: 8
+    priv_dim: 7                                   # one-hot (3) + 四元數 (4)
+    priv_center: [0, 0, 0, 0, 0, 0, 0]
+    priv_half_range: [1, 1, 1, 1, 1, 1, 1]
+  critic:
+    hidden_dims: [512, 256, 128]
+    activation: elu
+    obs_normalization: true
+  algorithm:
+    class_name: hw2_dexhand.student.rma:RMAAdaptation
+    teacher_checkpoint: runs/multi_teacher
+    adapt_learning_rate: 5.0e-4
+    learning_rate: 1.0e-3
+    entropy_coef: 0.005
+    gamma: 0.99
+    lam: 0.95
+    desired_kl: 0.01
+    num_learning_epochs: 5
+    num_mini_batches: 4

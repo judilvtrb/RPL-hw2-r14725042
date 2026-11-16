@@ -1,0 +1,53 @@
+# Problem 3 / RMA 第一階段：老師（teacher）。
+# actor 可以讀 critic 群組裡的 6 個真實物理參數 → 只能用來訓練，不能交出去評分。
+# 訓練：hw2 train adapt/yaw_absolute/ball --config adapt_teacher.yaml
+# 想看「知道物理參數時最好能做到多少」：hw2 eval ... --config adapt_teacher.yaml --allow-privileged
+
+reward:
+  orientation: {weight: 1.0}
+  success: {weight: 250.0}
+  obj_linvel: {weight: -0.3}
+  pose_diff: {weight: -0.3}
+  torque: {weight: -0.1}
+  work: {weight: -2.0}
+
+env:
+  observations:
+    policy:
+      terms:
+        # 把歷史拉長到 30 步（1.5 秒），讓學生有足夠的「手感」推測物理參數。
+        # 老師和學生必須用一樣的設定。
+        joint_pos: {history_length: 30}
+        joint_target: {history_length: 30}
+        object_pos: {history_length: 30}
+
+algo:
+  obs_groups:
+    actor: [actor, critic]   # 含 critic → RMAActor 自動進入老師模式
+    critic: [critic]
+  num_envs: 1024
+  num_steps_per_env: 24
+  max_iterations: 3000
+  save_interval: 100
+  actor:
+    class_name: hw2_dexhand.student.rma.RMAActor
+    hidden_dims: [512, 256, 128]
+    activation: elu
+    obs_normalization: true
+    term_dims: [16, 16, 3]   # joint_pos, joint_target, object_pos
+    history_length: 30       # 要跟上面 env.observations 的 history_length 一樣
+    short_length: 3          # base policy 只看最近 3 幀（跟原本的設定一樣）
+    tail_dim: 4              # goal_rel_quat
+    latent_dim: 8
+  critic:
+    hidden_dims: [512, 256, 128]
+    activation: elu
+    obs_normalization: true
+  algorithm:
+    learning_rate: 1.0e-3
+    entropy_coef: 0.005
+    gamma: 0.99
+    lam: 0.95
+    desired_kl: 0.01
+    num_learning_epochs: 5
+    num_mini_batches: 4

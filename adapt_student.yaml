@@ -1,0 +1,54 @@
+# Problem 3 / RMA 第二階段：學生（student）。這一份是要交出去評分的。
+# 先把老師的 run 資料夾複製到 runs/adapt_teacher，再訓練：
+#   hw2 train adapt/yaw_absolute/ball --config adapt_student.yaml
+# 評分：hw2 eval adapt/yaw_absolute/ball <學生的run> --config adapt_student.yaml --challenge public
+
+reward:
+  orientation: {weight: 1.0}
+  success: {weight: 250.0}
+  obj_linvel: {weight: -0.3}
+  pose_diff: {weight: -0.3}
+  torque: {weight: -0.1}
+  work: {weight: -2.0}
+
+env:
+  observations:
+    policy:
+      terms:
+        joint_pos: {history_length: 30}
+        joint_target: {history_length: 30}
+        object_pos: {history_length: 30}
+
+algo:
+  obs_groups:
+    actor: [actor]       # 只有 actor → 學生模式，評分時合法
+    critic: [critic]
+  num_envs: 1024
+  num_steps_per_env: 24
+  max_iterations: 500    # 第二階段只是監督式學習，收斂得比 PPO 快很多
+  save_interval: 50
+  actor:
+    class_name: hw2_dexhand.student.rma.RMAActor
+    hidden_dims: [512, 256, 128]
+    activation: elu
+    obs_normalization: true
+    term_dims: [16, 16, 3]
+    history_length: 30
+    short_length: 3
+    tail_dim: 4
+    latent_dim: 8
+  critic:
+    hidden_dims: [512, 256, 128]
+    activation: elu
+    obs_normalization: true
+  algorithm:
+    class_name: hw2_dexhand.student.rma:RMAAdaptation
+    teacher_checkpoint: runs/adapt_teacher   # 老師的 run 資料夾（自動用編號最大的 model）
+    adapt_learning_rate: 5.0e-4
+    learning_rate: 1.0e-3
+    entropy_coef: 0.005
+    gamma: 0.99
+    lam: 0.95
+    desired_kl: 0.01
+    num_learning_epochs: 5
+    num_mini_batches: 4

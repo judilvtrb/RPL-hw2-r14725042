@@ -1,0 +1,39 @@
+# Advanced Challenge：模仿學習 — Behavior Cloning（專家操作環境，學生只學專家看過的狀態）
+# 專家 = Problem 1 的 PPO policy（runs/so3_ball，eval 8.00）。學生是全新的同大小網路，不使用 reward。
+# 訓練：hw2 train so3_absolute/ball --config il_bc.yaml
+# 評分：hw2 eval so3_absolute/ball <run> --config il_bc.yaml
+
+reward:
+  orientation: {weight: 1.0}
+  success: {weight: 250.0}
+  obj_linvel: {weight: -0.3}
+  pose_diff: {weight: -0.3}
+  torque: {weight: -0.1}
+  work: {weight: -2.0}
+
+algo:
+  num_envs: 1024
+  num_steps_per_env: 24
+  max_iterations: 300      # PPO 專家用了 1500 iterations；看模仿學習用 1/5 的資料能做到多少
+  save_interval: 50
+  actor:                   # 跟專家完全一樣的網路結構（專家權重才載得進來）
+    class_name: rsl_rl.models.MLPModel
+    hidden_dims: [512, 256, 128]
+    activation: elu
+    obs_normalization: true
+  critic:
+    hidden_dims: [512, 256, 128]
+    activation: elu
+    obs_normalization: true
+  algorithm:
+    class_name: hw2_dexhand.student.imitation:Imitation
+    expert_checkpoint: runs/so3_ball
+    mode: bc
+    imitation_learning_rate: 1.0e-3
+    learning_rate: 1.0e-3
+    entropy_coef: 0.005
+    gamma: 0.99
+    lam: 0.95
+    desired_kl: 0.01
+    num_learning_epochs: 5
+    num_mini_batches: 4

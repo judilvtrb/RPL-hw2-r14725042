@@ -1,0 +1,38 @@
+# 第一版設定：先求能跑、能學會，之後再調
+# 用法：hw2 train yaw_absolute/ball --config my_config.yaml
+
+reward:
+  orientation:
+    weight: 1.0        # 越接近目標方向，分數越高（每一步都給的引導分數）
+  success:
+    weight: 250.0      # 進到目標 0.4 rad 以內就給大獎（真正要的行為）
+  obj_linvel:
+    weight: -0.3       # 物體亂飛扣分（避免甩掉）
+  pose_diff:
+    weight: -0.3       # 手偏離起始抓握姿勢扣分（避免手亂張）
+  torque:
+    weight: -0.1       # 出力太大扣分
+  work:
+    weight: -2.0       # 做功太多扣分（動作太猛）
+
+algo:
+  num_envs: 1024           # 同時跑幾個模擬環境
+  num_steps_per_env: 24    # 每個環境收集幾步再更新一次網路
+  max_iterations: 400      # 更新幾輪（1024 x 24 x 400 約 1000 萬筆資料）
+  save_interval: 50
+  actor:
+    hidden_dims: [512, 256, 128]
+    activation: elu
+    obs_normalization: true
+  critic:
+    hidden_dims: [512, 256, 128]
+    activation: elu
+    obs_normalization: true
+  algorithm:
+    learning_rate: 1.0e-3
+    entropy_coef: 0.005    # 鼓勵探索的程度
+    gamma: 0.99            # 多看重未來的獎勵
+    lam: 0.95
+    desired_kl: 0.01       # 每次更新不要改太多
+    num_learning_epochs: 5
+    num_mini_batches: 4

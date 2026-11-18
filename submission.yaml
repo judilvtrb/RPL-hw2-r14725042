@@ -1,0 +1,19 @@
+# submission.yaml：助教評分時用的清單
+student_id: r14725042
+team: r14725042
+cells:
+  so3_absolute/ball:
+    checkpoint: runs/so3_ball
+    config: my_config.yaml
+  so3_absolute/cube:
+    checkpoint: runs/so3_cube
+    config: my_config.yaml
+  so3_absolute/cylinder:
+    checkpoint: runs/so3_cyl
+    config: my_config.yaml
+  multi/yaw_absolute:
+    checkpoint: runs/multi_student
+    config: multi_student.yaml
+  adapt/yaw_absolute/ball:
+    checkpoint: runs/adapt_baseline
+    config: adapt_baseline.yaml

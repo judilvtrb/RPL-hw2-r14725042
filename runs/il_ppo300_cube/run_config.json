@@ -1,0 +1,592 @@
+{
+  "run": {
+    "algo": "ppo",
+    "task": "AllegroInhandReorient",
+    "sim_backend": "mujoco",
+    "device": "cpu",
+    "configured_device": "cpu",
+    "collector_device": null,
+    "resolved_devices": {
+      "learner": {
+        "configured": "cpu",
+        "resolved": "cpu"
+      },
+      "collector_tensor": {
+        "configured": "auto",
+        "resolved": "cpu"
+      }
+    },
+    "log_dir": "/root/rpl/HW2/logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-17_02-58-06_mujoco",
+    "start_time_utc": "2026-11-16T18:58:06.610595+00:00",
+    "hostname": "DESKTOP-Q5DR7AN",
+    "user": "root",
+    "git": {
+      "commit": "302a73470246c82032177538a34a3e2da6cc94f8",
+      "branch": "main",
+      "dirty": true
+    },
+    "hardware": {
+      "platform": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "chip": "Intel(R) Core(TM) i9-14900K",
+      "cpu_total_cores": "16",
+      "cpu_performance_cores": "unknown",
+      "cpu_efficiency_cores": "unknown",
+      "gpu_name": "NVIDIA GeForce RTX 4070 Ti",
+      "memory": "31.2 GB",
+      "gpu_memory": "12282 MiB"
+    },
+    "wandb": {
+      "project": "unilab",
+      "entity": null,
+      "name": "ppo__AllegroInhandReorient__2026-11-17_02-58-06_mujoco",
+      "group": "AllegroInhandReorient",
+      "job_type": "ppo",
+      "tags": [
+        "ppo",
+        "AllegroInhandReorient",
+        "mujoco",
+        "user-root"
+      ],
+      "notes": null,
+      "mode": null
+    },
+    "configured_seed": 1,
+    "configured_seed_source": "algo.seed",
+    "effective_seed": 1,
+    "tf32_matmul": {
+      "requested": "ieee",
+      "enabled": false,
+      "reason": "configured_ieee",
+      "applied": true
+    }
+  },
+  "config": {
+    "algo": {
+      "algo": "ppo",
+      "algo_log_name": "rsl_rl_ppo",
+      "seed": 1,
+      "num_envs": 1024,
+      "num_steps_per_env": 24,
+      "max_iterations": 300,
+      "save_interval": 50,
+      "obs_groups": {
+        "actor": [
+          "policy"
+        ],
+        "critic": [
+          "policy"
+        ]
+      },
+      "experiment_name": "test",
+      "run_name": "",
+      "resume": false,
+      "load_run": "-1",
+      "checkpoint": -1,
+      "resume_path": null,
+      "actor": {
+        "class_name": "rsl_rl.models.MLPModel",
+        "hidden_dims": [
+          512,
+          256,
+          128
+        ],
+        "activation": "elu",
+        "obs_normalization": true,
+        "distribution_cfg": {
+          "class_name": "rsl_rl.modules.distribution.GaussianDistribution",
+          "init_std": 1.0,
+          "std_type": "scalar"
+        }
+      },
+      "critic": {
+        "class_name": "rsl_rl.models.MLPModel",
+        "hidden_dims": [
+          512,
+          256,
+          128
+        ],
+        "activation": "elu",
+        "obs_normalization": true
+      },
+      "algorithm": {
+        "class_name": "rsl_rl.algorithms:PPO",
+        "value_loss_coef": 4.0,
+        "use_clipped_value_loss": true,
+        "clip_param": 0.2,
+        "entropy_coef": 0.005,
+        "num_learning_epochs": 5,
+        "num_mini_batches": 4,
+        "learning_rate": 0.001,
+        "schedule": "adaptive",
+        "gamma": 0.99,
+        "lam": 0.95,
+        "desired_kl": 0.01,
+        "max_grad_norm": 1.0
+      }
+    },
+    "training": {
+      "task_name": "AllegroInhandReorient",
+      "dp_collector_cpu_ids": null,
+      "device": "cpu",
+      "logger": "tensorboard",
+      "log_interval": 1,
+      "wandb_project": "unilab",
+      "wandb_entity": null,
+      "wandb_group": null,
+      "wandb_job_type": null,
+      "wandb_name": null,
+      "wandb_tags": [],
+      "wandb_notes": null,
+      "wandb_mode": null,
+      "sim_backend": "mujoco",
+      "collector_tensor_device": "auto",
+      "nan_guard": {
+        "enabled": true,
+        "buffer_size": 100,
+        "max_envs_to_dump": 5,
+        "output_dir": null
+      },
+      "play_only": false,
+      "no_play": false,
+      "tf32_matmul": "ieee",
+      "sim2sim_strict": true,
+      "play_render_mode": "auto",
+      "play_env_num": 16,
+      "render_spacing": 0.5,
+      "play_steps": 200,
+      "cam_distance": 1.5,
+      "cam_elevation": -20.0,
+      "cam_azimuth": 90.0,
+      "cam_lookat": [
+        0.75,
+        0.75,
+        0
+      ],
+      "cam_tracking": false,
+      "cam_tracking_env_idx": 0,
+      "cam_tracking_extra_envs": 2,
+      "log_root": null,
+      "num_timesteps": null,
+      "log_dir": null
+    },
+    "interactive": {
+      "action_mode": "zero",
+      "policy_obs_mode": "auto",
+      "show_target_bodies": false,
+      "show_reward_debug": false,
+      "target_show_axes": false,
+      "target_body_names": "",
+      "target_max_bodies": 0,
+      "target_marker_radius": 0.02,
+      "target_axis_length": 0.08,
+      "target_marker_alpha": 0.75,
+      "reward_debug_show_velocity": false,
+      "reward_debug_lin_vel_scale": 0.08,
+      "reward_debug_ang_vel_scale": 0.05,
+      "reward_debug_show_connectors": false,
+      "reward_debug_show_global_anchor": false,
+      "camera_follow_body": true,
+      "camera_focus_body_name": "",
+      "camera_height_offset": 0.15,
+      "camera_distance": null,
+      "camera_elevation": null,
+      "camera_azimuth": null,
+      "use_env_visual_model": true,
+      "speed": 1.0,
+      "start_paused": false,
+      "keyboard": false,
+      "keyboard_step_lin": 0.1,
+      "keyboard_step_ang": 0.2
+    },
+    "viser": {
+      "port": 8080,
+      "env_idx": 0,
+      "display_mode": "all",
+      "max_envs": 16
+    },
+    "env": {
+      "scene": {
+        "model_file": "/root/rpl/HW2/src/hw2_dexhand/assets/robots/allegro_hand/scene_cube.xml",
+        "default_keyframe_name": "home",
+        "entities": {
+          "robot": {
+            "root_body_name": "palm",
+            "body_names": [
+              "palm",
+              "ff_tip",
+              "mf_tip",
+              "rf_tip",
+              "th_tip"
+            ],
+            "joint_names": [
+              "ffj0",
+              "ffj1",
+              "ffj2",
+              "ffj3",
+              "mfj0",
+              "mfj1",
+              "mfj2",
+              "mfj3",
+              "rfj0",
+              "rfj1",
+              "rfj2",
+              "rfj3",
+              "thj0",
+              "thj1",
+              "thj2",
+              "thj3"
+            ],
+            "actuator_names": [
+              "ffa0",
+              "ffa1",
+              "ffa2",
+              "ffa3",
+              "mfa0",
+              "mfa1",
+              "mfa2",
+              "mfa3",
+              "rfa0",
+              "rfa1",
+              "rfa2",
+              "rfa3",
+              "tha0",
+              "tha1",
+              "tha2",
+              "tha3"
+            ]
+          },
+          "object": {
+            "root_body_name": "object",
+            "body_names": [
+              "object"
+            ],
+            "geom_names": [
+              "object"
+            ]
+          }
+        }
+      },
+      "sim_dt": 0.005,
+      "ctrl_dt": 0.05,
+      "max_episode_seconds": 20.0,
+      "observations": {
+        "policy": {
+          "concatenate_terms": true,
+          "terms": {
+            "joint_pos": {
+              "func": "hw2_dexhand.tasks.allegro_inhand.terms.hand_joint_pos_normalized",
+              "history_length": 3,
+              "params": {
+                "asset_cfg": {
+                  "_target_": "unilab.managers.SceneEntityCfg",
+                  "name": "robot"
+                }
+              }
+            },
+            "joint_target": {
+              "func": "hw2_dexhand.tasks.allegro_inhand.terms.joint_position_target",
+              "history_length": 3,
+              "params": {
+                "action_name": "hand",
+                "entity_name": "robot"
+              }
+            },
+            "object_pos": {
+              "func": "hw2_dexhand.tasks.allegro_inhand.terms.object_pos_w",
+              "history_length": 3,
+              "params": {
+                "asset_cfg": {
+                  "_target_": "unilab.managers.SceneEntityCfg",
+                  "name": "object"
+                }
+              }
+            },
+            "goal_rel_quat": {
+              "func": "hw2_dexhand.tasks.allegro_inhand.terms.goal_relative_quat",
+              "history_length": 0,
+              "params": {
+                "command_name": "goal",
+                "asset_cfg": {
+                  "_target_": "unilab.managers.SceneEntityCfg",
+                  "name": "object"
+                }
+              }
+            },
+            "object_quat": {
+              "func": "hw2_dexhand.tasks.allegro_inhand.terms.object_quat_canonical_w",
+              "history_length": 0,
+              "params": {
+                "asset_cfg": {
+                  "_target_": "unilab.managers.SceneEntityCfg",
+                  "name": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "actions": {
+        "hand": {
+          "_target_": "hw2_dexhand.tasks.allegro_inhand.terms.IntegratedJointPositionActionCfg",
+          "entity_name": "robot",
+          "actuator_names": [
+            ".*"
+          ],
+          "scale": 0.041666667
+        }
+      },
+      "events": {
+        "reset_scene_to_default": {
+          "func": "unilab.envs.mdp.reset_scene_to_default",
+          "mode": "reset"
+        },
+        "reset_from_grasp_cache": {
+          "func": "hw2_dexhand.tasks.allegro_inhand.terms.reset_from_grasp_cache",
+          "mode": "reset",
+          "params": {
+            "cache_path": "/root/rpl/HW2/src/hw2_dexhand/assets/caches/allegro_cube_grasp_10k.npy",
+            "joint_noise": 0.0,
+            "action_name": "hand",
+            "hand_asset_cfg": {
+              "_target_": "unilab.managers.SceneEntityCfg",
+              "name": "robot"
+            },
+            "object_asset_cfg": {
+              "_target_": "unilab.managers.SceneEntityCfg",
+              "name": "object"
+            }
+          }
+        }
+      },
+      "terminations": {
+        "time_out": {
+          "func": "unilab.envs.mdp.time_out",
+          "time_out": true
+        },
+        "object_dropped": {
+          "func": "hw2_dexhand.tasks.allegro_inhand.terms.object_dropped",
+          "params": {
+            "z_threshold": 0.105,
+            "asset_cfg": {
+              "_target_": "unilab.managers.SceneEntityCfg",
+              "name": "object"
+            }
+          }
+        },
+        "goal_count_reached": {
+          "func": "hw2_dexhand.tasks.allegro_inhand.terms.goal_count_reached",
+          "params": {
+            "command_name": "goal"
+          }
+        }
+      },
+      "policy_observation_group": "policy",
+      "critic_observation_group": null,
+      "scale_rewards_by_dt": true,
+      "commands": {
+        "goal": {
+          "_target_": "hw2_dexhand.tasks.allegro_inhand.terms.GoalOrientationCommandCfg",
+          "entity_name": "object",
+          "mode": "so3",
+          "frame": "absolute",
+          "yaw_range": [
+            -3.141592653589793,
+            3.141592653589793
+          ],
+          "success_tolerance_rad": 0.4,
+          "resample_on_success": true,
+          "max_consecutive_successes": 0
+        }
+      }
+    },
+    "play_profile": {
+      "enabled": true,
+      "env": {
+        "render_spacing": 2.0
+      }
+    },
+    "reward": {
+      "rotate": {
+        "func": "hw2_dexhand.tasks.allegro_inhand.terms.object_angvel_about_axis",
+        "weight": 0.0,
+        "params": {
+          "axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "clip": [
+            -0.5,
+            0.5
+          ],
+          "asset_cfg": {
+            "_target_": "unilab.managers.SceneEntityCfg",
+            "name": "object"
+          }
+        }
+      },
+      "obj_linvel": {
+        "func": "hw2_dexhand.tasks.allegro_inhand.terms.object_lin_vel_l1",
+        "weight": -0.3,
+        "params": {
+          "asset_cfg": {
+            "_target_": "unilab.managers.SceneEntityCfg",
+            "name": "object"
+          }
+        }
+      },
+      "pose_diff": {
+        "func": "hw2_dexhand.tasks.allegro_inhand.terms.hand_pose_diff_from_reset",
+        "weight": -0.3,
+        "params": {
+          "event_name": "reset_from_grasp_cache",
+          "asset_cfg": {
+            "_target_": "unilab.managers.SceneEntityCfg",
+            "name": "robot"
+          }
+        }
+      },
+      "torque": {
+        "func": "hw2_dexhand.tasks.allegro_inhand.terms.hand_pd_torque_l2",
+        "weight": -0.1,
+        "params": {
+          "kp": 1.0,
+          "kd": 0.1,
+          "torque_clip": 0.5,
+          "action_name": "hand",
+          "asset_cfg": {
+            "_target_": "unilab.managers.SceneEntityCfg",
+            "name": "robot"
+          }
+        }
+      },
+      "work": {
+        "func": "hw2_dexhand.tasks.allegro_inhand.terms.hand_pd_work_sq",
+        "weight": -2.0,
+        "params": {
+          "kp": 1.0,
+          "kd": 0.1,
+          "torque_clip": 0.5,
+          "action_name": "hand",
+          "asset_cfg": {
+            "_target_": "unilab.managers.SceneEntityCfg",
+            "name": "robot"
+          }
+        }
+      },
+      "orientation": {
+        "func": "hw2_dexhand.tasks.allegro_inhand.terms.goal_orientation_reward",
+        "weight": 1.0,
+        "params": {
+          "rot_eps": 0.1,
+          "command_name": "goal",
+          "asset_cfg": {
+            "_target_": "unilab.managers.SceneEntityCfg",
+            "name": "object"
+          }
+        }
+      },
+      "success": {
+        "func": "hw2_dexhand.tasks.allegro_inhand.terms.goal_success",
+        "weight": 250.0,
+        "params": {
+          "command_name": "goal",
+          "asset_cfg": {
+            "_target_": "unilab.managers.SceneEntityCfg",
+            "name": "object"
+          }
+        }
+      }
+    }
+  },
+  "contract_snapshot": {
+    "algo.obs_groups": {
+      "actor": [
+        "policy"
+      ],
+      "critic": [
+        "policy"
+      ]
+    },
+    "env.observations": {
+      "policy": {
+        "concatenate_terms": true,
+        "terms": {
+          "joint_pos": {
+            "func": "hw2_dexhand.tasks.allegro_inhand.terms.hand_joint_pos_normalized",
+            "history_length": 3,
+            "params": {
+              "asset_cfg": {
+                "_target_": "unilab.managers.SceneEntityCfg",
+                "name": "robot"
+              }
+            }
+          },
+          "joint_target": {
+            "func": "hw2_dexhand.tasks.allegro_inhand.terms.joint_position_target",
+            "history_length": 3,
+            "params": {
+              "action_name": "hand",
+              "entity_name": "robot"
+            }
+          },
+          "object_pos": {
+            "func": "hw2_dexhand.tasks.allegro_inhand.terms.object_pos_w",
+            "history_length": 3,
+            "params": {
+              "asset_cfg": {
+                "_target_": "unilab.managers.SceneEntityCfg",
+                "name": "object"
+              }
+            }
+          },
+          "goal_rel_quat": {
+            "func": "hw2_dexhand.tasks.allegro_inhand.terms.goal_relative_quat",
+            "history_length": 0,
+            "params": {
+              "command_name": "goal",
+              "asset_cfg": {
+                "_target_": "unilab.managers.SceneEntityCfg",
+                "name": "object"
+              }
+            }
+          },
+          "object_quat": {
+            "func": "hw2_dexhand.tasks.allegro_inhand.terms.object_quat_canonical_w",
+            "history_length": 0,
+            "params": {
+              "asset_cfg": {
+                "_target_": "unilab.managers.SceneEntityCfg",
+                "name": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "env.actions": {
+      "hand": {
+        "_target_": "hw2_dexhand.tasks.allegro_inhand.terms.IntegratedJointPositionActionCfg",
+        "entity_name": "robot",
+        "actuator_names": [
+          ".*"
+        ],
+        "scale": 0.041666667
+      }
+    },
+    "env.policy_observation_group": "policy",
+    "algo.actor.hidden_dims": [
+      512,
+      256,
+      128
+    ],
+    "algo.critic.hidden_dims": [
+      512,
+      256,
+      128
+    ],
+    "algo.actor.obs_normalization": true,
+    "algo.critic.obs_normalization": true,
+    "env.ctrl_dt": 0.05
+  }
+}

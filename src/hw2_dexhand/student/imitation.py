@@ -74,12 +74,19 @@ class Imitation(PPO):
             else:
                 expert = copy.deepcopy(actor)
                 state = torch.load(ckpt, map_location=self.device, weights_only=False)["actor_state_dict"]
-                expert.load_state_dict(state, strict=True)
-                expert.eval()
-                for p in expert.parameters():
-                    p.requires_grad_(False)
-                self.expert = expert
-                print(f"[Imitation] 已載入專家：{ckpt}（mode={self.mode}）")
+                try:
+                    expert.load_state_dict(state, strict=True)
+                except RuntimeError as exc:
+                    # 例如 config 寫的是球的專家（輸入 109 維），但現在評分的是 cube（113 維）。
+                    # 評分時用不到專家，所以只印警告；訓練時 update() 會因為沒有專家而報錯。
+                    print(f"[Imitation] 警告：專家 {ckpt} 跟目前的網路結構對不上，略過（評分時可以忽略）：{exc}")
+                    expert = None
+                if expert is not None:
+                    expert.eval()
+                    for p in expert.parameters():
+                        p.requires_grad_(False)
+                    self.expert = expert
+                    print(f"[Imitation] 已載入專家：{ckpt}（mode={self.mode}）")
 
         # 只訓練學生 actor；critic 不需要（模仿學習不用 reward）。
         self.learning_rate = float(imitation_learning_rate)

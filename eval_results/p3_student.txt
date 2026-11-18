@@ -1,0 +1,513 @@
+term: object_physics set to None, skipping...
+term: hand_gains set to None, skipping...
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=109, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[RMAAdaptation] 已載入老師權重：runs/adapt_teacher/model_2999.pt
+[adapt/yaw_absolute/ball] model_499.pt: policy_obs_mode=actor, 4 x 16 episodes
+term: object_physics set to None, skipping...
+term: hand_gains set to None, skipping...
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=109, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[RMAAdaptation] 已載入老師權重：runs/adapt_teacher/model_2999.pt
+[adapt/yaw_absolute/ball @in_range] model_499.pt: policy_obs_mode=actor, 4 x 16 episodes
+term: object_physics set to None, skipping...
+term: hand_gains set to None, skipping...
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=109, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[RMAAdaptation] 已載入老師權重：runs/adapt_teacher/model_2999.pt
+[adapt/yaw_absolute/ball @light] model_499.pt: policy_obs_mode=actor, 4 x 16 episodes
+term: object_physics set to None, skipping...
+term: hand_gains set to None, skipping...
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=109, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[RMAAdaptation] 已載入老師權重：runs/adapt_teacher/model_2999.pt
+[adapt/yaw_absolute/ball @heavy] model_499.pt: policy_obs_mode=actor, 4 x 16 episodes
+term: object_physics set to None, skipping...
+term: hand_gains set to None, skipping...
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=109, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[RMAAdaptation] 已載入老師權重：runs/adapt_teacher/model_2999.pt
+[adapt/yaw_absolute/ball @slippery] model_499.pt: policy_obs_mode=actor, 4 x 16 episodes
+term: object_physics set to None, skipping...
+term: hand_gains set to None, skipping...
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=109, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[RMAAdaptation] 已載入老師權重：runs/adapt_teacher/model_2999.pt
+[adapt/yaw_absolute/ball @sticky] model_499.pt: policy_obs_mode=actor, 4 x 16 episodes
+term: object_physics set to None, skipping...
+term: hand_gains set to None, skipping...
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=109, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[RMAAdaptation] 已載入老師權重：runs/adapt_teacher/model_2999.pt
+[adapt/yaw_absolute/ball @off_center] model_499.pt: policy_obs_mode=actor, 4 x 16 episodes
+term: object_physics set to None, skipping...
+term: hand_gains set to None, skipping...
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=109, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[RMAAdaptation] 已載入老師權重：runs/adapt_teacher/model_2999.pt
+[adapt/yaw_absolute/ball @weak_motor] model_499.pt: policy_obs_mode=actor, 4 x 16 episodes
+term: object_physics set to None, skipping...
+term: hand_gains set to None, skipping...
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=109, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[RMAAdaptation] 已載入老師權重：runs/adapt_teacher/model_2999.pt
+[adapt/yaw_absolute/ball @strong_motor] model_499.pt: policy_obs_mode=actor, 4 x 16 episodes
+adapt/yaw_absolute/ball           19.55 goals/ep   3.0/3 pts  tier 3
+  adapt/yaw_absolute/ball @in_range  27.50 goals/ep  drop 0.06
+  adapt/yaw_absolute/ball @light  30.56 goals/ep  drop 0.05
+  adapt/yaw_absolute/ball @heavy  20.84 goals/ep  drop 0.25
+  adapt/yaw_absolute/ball @slippery  24.83 goals/ep  drop 0.17
+  adapt/yaw_absolute/ball @sticky  28.89 goals/ep  drop 0.06
+  adapt/yaw_absolute/ball @off_center  21.98 goals/ep  drop 0.19
+  adapt/yaw_absolute/ball @weak_motor  20.08 goals/ep  drop 0.09
+  adapt/yaw_absolute/ball @strong_motor  32.75 goals/ep  drop 0.06

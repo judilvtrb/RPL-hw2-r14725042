@@ -1,0 +1,21 @@
+{
+  "cell": "so3_absolute/cylinder",
+  "checkpoint": "runs/il_dagger_cyl/model_299.pt",
+  "config": "il_dagger.yaml",
+  "metrics": null,
+  "score": {
+    "metric": "goals_per_episode",
+    "value": null,
+    "tier": 0,
+    "points": 0.0,
+    "max_points": 3.0,
+    "thresholds": [
+      0.25,
+      0.75,
+      1.5
+    ]
+  },
+  "warnings": [],
+  "error": "CheckpointError: cannot load runs/il_dagger_cyl/model_299.pt with the submitted algo config (actor {'hidden_dims': [512, 256, 128], 'activation': 'elu', 'obs_normalization': True, 'distribution_cfg': {'init_std': 1.0, 'std_type': 'scalar'}}): Error(s) in loading state_dict for MLPModel:\n\tsize mismatch for obs_normalizer._mean: copying a param with shape torch.Size([1, 109]) from checkpoint, the shape in current model is torch.Size([1, 113]).\n\tsize mismatch for obs_normalizer._var: copying a param with shape torch.Size([1, 109]) from checkpoint, the shape in current model is torch.Size([1, 113]).\n\tsize mismatch for obs_normalizer._std: copying a param with shape torch.Size([1, 109]) from checkpoint, the shape in current model is torch.Size([1, 113]).\n\tsize mismatch for mlp.0.weight: copying a param with shape torch.Size([512, 109]) from checkpoint, the shape in current model is torch.Size([512, 113]).",
+  "seconds": 2.486546125001041
+}

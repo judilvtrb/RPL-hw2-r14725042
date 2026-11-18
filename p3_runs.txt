@@ -1,0 +1,4 @@
+baseline: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-16_17-23-25_mujoco/
+teacher: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-16_19-13-42_mujoco/
+student: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-16_21-16-25_mujoco/
+histmlp: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-17_03-57-11_mujoco/

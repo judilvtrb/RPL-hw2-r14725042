@@ -1,0 +1,486 @@
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor', 'critic']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=115, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[adapt/yaw_absolute/ball] model_2999.pt: policy_obs_mode=actor, 4 x 16 episodes
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor', 'critic']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=115, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[adapt/yaw_absolute/ball @in_range] model_2999.pt: policy_obs_mode=actor, 4 x 16 episodes
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor', 'critic']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=115, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[adapt/yaw_absolute/ball @light] model_2999.pt: policy_obs_mode=actor, 4 x 16 episodes
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor', 'critic']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=115, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[adapt/yaw_absolute/ball @heavy] model_2999.pt: policy_obs_mode=actor, 4 x 16 episodes
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor', 'critic']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=115, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[adapt/yaw_absolute/ball @slippery] model_2999.pt: policy_obs_mode=actor, 4 x 16 episodes
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor', 'critic']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=115, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[adapt/yaw_absolute/ball @sticky] model_2999.pt: policy_obs_mode=actor, 4 x 16 episodes
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor', 'critic']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=115, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[adapt/yaw_absolute/ball @off_center] model_2999.pt: policy_obs_mode=actor, 4 x 16 episodes
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor', 'critic']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=115, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[adapt/yaw_absolute/ball @weak_motor] model_2999.pt: policy_obs_mode=actor, 4 x 16 episodes
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['actor', 'critic']
+	 critic :  ['critic']
+--------------------------------------------------------------------------------
+Actor Model: RMAActor(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=117, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=16, bias=True)
+  )
+  (priv_encoder): Sequential(
+    (0): MLP(
+      (0): Linear(in_features=6, out_features=64, bias=True)
+      (1): ELU(alpha=1.0)
+      (2): Linear(in_features=64, out_features=64, bias=True)
+      (3): ELU(alpha=1.0)
+      (4): Linear(in_features=64, out_features=8, bias=True)
+    )
+    (1): Tanh()
+  )
+  (adapt_conv): Sequential(
+    (0): Conv1d(35, 32, kernel_size=(1,), stride=(1,))
+    (1): ELU(alpha=1.0)
+    (2): Conv1d(32, 32, kernel_size=(6,), stride=(3,))
+    (3): ELU(alpha=1.0)
+    (4): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+    (5): ELU(alpha=1.0)
+  )
+  (adapt_head): Sequential(
+    (0): Linear(in_features=224, out_features=8, bias=True)
+    (1): Tanh()
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=115, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+[adapt/yaw_absolute/ball @strong_motor] model_2999.pt: policy_obs_mode=actor, 4 x 16 episodes
+adapt/yaw_absolute/ball           21.97 goals/ep   3.0/3 pts  tier 3
+  adapt/yaw_absolute/ball @in_range  28.06 goals/ep  drop 0.08
+  adapt/yaw_absolute/ball @light  30.48 goals/ep  drop 0.03
+  adapt/yaw_absolute/ball @heavy  22.36 goals/ep  drop 0.17
+  adapt/yaw_absolute/ball @slippery  25.05 goals/ep  drop 0.19
+  adapt/yaw_absolute/ball @sticky  27.36 goals/ep  drop 0.08
+  adapt/yaw_absolute/ball @off_center  24.84 goals/ep  drop 0.06
+  adapt/yaw_absolute/ball @weak_motor  20.30 goals/ep  drop 0.09
+  adapt/yaw_absolute/ball @strong_motor  33.44 goals/ep  drop 0.06

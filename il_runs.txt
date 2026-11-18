@@ -1,0 +1,9 @@
+bc_ball: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-17_02-05-26_mujoco/
+dagger_ball: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-17_02-15-06_mujoco/
+ppo300_ball: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-17_02-24-47_mujoco/
+bc_cube: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-17_02-37-19_mujoco/
+dagger_cube: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-17_02-47-38_mujoco/
+ppo300_cube: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-17_02-58-06_mujoco/
+bc_cyl: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-17_03-12-49_mujoco/
+dagger_cyl: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-17_03-26-12_mujoco/
+ppo300_cyl: logs/rsl_rl_ppo/AllegroInhandReorient/2026-11-17_03-39-25_mujoco/

@@ -1,0 +1,45 @@
+# Problem 3 版本 B：長歷史 MLP（implicit adaptation）
+# 一般的 MLP，但 actor 看得到最近 30 步的歷史，直接從歷史決定動作，不經過「推測物理參數」這一步。
+# 訓練：hw2 train adapt/yaw_absolute/ball --config adapt_histmlp.yaml
+
+reward:
+  orientation: {weight: 1.0}
+  success: {weight: 250.0}
+  obj_linvel: {weight: -0.3}
+  pose_diff: {weight: -0.3}
+  torque: {weight: -0.1}
+  work: {weight: -2.0}
+
+env:
+  observations:
+    policy:
+      terms:
+        joint_pos: {history_length: 30}
+        joint_target: {history_length: 30}
+        object_pos: {history_length: 30}
+
+algo:
+  obs_groups:
+    actor: [actor]
+    critic: [critic]
+  num_envs: 1024
+  num_steps_per_env: 24
+  max_iterations: 3000
+  save_interval: 100
+  actor:
+    class_name: rsl_rl.models.MLPModel
+    hidden_dims: [512, 256, 128]
+    activation: elu
+    obs_normalization: true
+  critic:
+    hidden_dims: [512, 256, 128]
+    activation: elu
+    obs_normalization: true
+  algorithm:
+    learning_rate: 1.0e-3
+    entropy_coef: 0.005
+    gamma: 0.99
+    lam: 0.95
+    desired_kl: 0.01
+    num_learning_epochs: 5
+    num_mini_batches: 4

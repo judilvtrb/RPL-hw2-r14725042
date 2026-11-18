@@ -12,3 +12,4 @@ outputs/
 src/hw2_dexhand/assets/caches/*
 !src/hw2_dexhand/assets/caches/.gitkeep
 .DS_Store
+*.log
